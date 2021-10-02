@@ -1,5 +1,5 @@
 import { Todo, TodoItem } from '../model/Todo';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Props {
   todo: Todo;
@@ -8,9 +8,16 @@ interface Props {
 
 const Body = ({ todo, setTodo }: Props) => {
   const [content, setContent] = useState<string>('');
+  const [updatedItemContent, setUpdatedItemContent] = useState<string>('');
+  useEffect(() => {
+    if (todo.todoItems.length) {
+      setUpdatedItemContent(todo.todoItems[todo.todoItems.length - 1].content);
+    }
+  }, [todo]);
 
   const addTodoItem = () => {
-    const nextId = todo.todoItems[todo.todoItems.length - 1].id + 1;
+    const lastId = todo.todoItems.length;
+    const nextId = lastId ? todo.todoItems[todo.todoItems.length - 1].id + 1 : 1;
     setTodo({
       todoItems: [...todo.todoItems, { id: nextId, content: content }],
     });
@@ -20,6 +27,7 @@ const Body = ({ todo, setTodo }: Props) => {
   return (
     <>
       <div>Body</div>
+      {updatedItemContent && <div>최근 업데이트된 내용 = {updatedItemContent}</div>}
       <input type='text' value={content} onChange={event => {
         setContent(event.target.value);
       }} />
