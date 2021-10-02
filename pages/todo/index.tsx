@@ -1,11 +1,17 @@
 import Hello from '../../src/todo/component/Header';
 import Body from '../../src/todo/component/Body';
+import { useState } from 'react';
+import { Todo } from '../../src/todo/model/Todo';
 
-export default function Todo() {
+export default function TodoApp() {
+  const [todo, setTodo] = useState<Todo>({ todoItems: [{id: 1, content: "hello"}] });
+
   return (
     <>
       <Hello />
-      <Body />
+      <Body todo={todo}
+            setTodo={setTodo}
+      />
     </>
   );
 }
