@@ -1,7 +1,7 @@
 const Hello = () => {
   return (
     <>
-      <div>Header Page</div>
+      <div style={{ background: 'black'}}>Header Pagde</div>
     </>
   );
 }

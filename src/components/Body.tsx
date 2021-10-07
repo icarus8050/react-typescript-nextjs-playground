@@ -1,26 +1,26 @@
-import { Todo, TodoItem } from '../model/Todo';
 import { useEffect, useState } from 'react';
+import { TodoItem } from '../domain/todo/Todo';
 
 interface Props {
-  todo: Todo;
-  setTodo: (todo: Todo) => void;
+  todoItems: TodoItem[];
+  setTodoItems: (todoItems: TodoItem[]) => void;
 }
 
-const Body = ({ todo, setTodo }: Props) => {
+const Body = ({ todoItems, setTodoItems }: Props) => {
   const [content, setContent] = useState<string>('');
   const [updatedItemContent, setUpdatedItemContent] = useState<string>('');
   useEffect(() => {
-    if (todo.todoItems.length) {
-      setUpdatedItemContent(todo.todoItems[todo.todoItems.length - 1].content);
+    if (todoItems.length) {
+      setUpdatedItemContent(todoItems[todoItems.length - 1].content);
     }
-  }, [todo]);
+  }, [todoItems]);
 
   const addTodoItem = () => {
-    const lastId = todo.todoItems.length;
-    const nextId = lastId ? todo.todoItems[todo.todoItems.length - 1].id + 1 : 1;
-    setTodo({
-      todoItems: [...todo.todoItems, { id: nextId, content: content }],
-    });
+    const lastId = todoItems.length;
+    const nextId = lastId ? todoItems[todoItems.length - 1].id + 1 : 1;
+    setTodoItems(
+      [...todoItems, { id: nextId, content: content, done: false }],
+    );
     setContent('');
   };
 
@@ -34,7 +34,7 @@ const Body = ({ todo, setTodo }: Props) => {
       <button onClick={addTodoItem}>추가</button>
       <hr />
       {
-        todo.todoItems.map((it: TodoItem) => {
+        todoItems.map((it: TodoItem) => {
           return <li key={it.id}>{it.content}</li>;
         })
       }
