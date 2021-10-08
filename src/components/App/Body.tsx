@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { TodoItem } from '../domain/todo/Todo';
+import { TodoItem } from '../../domain/todo/Todo';
 
 interface Props {
   todoItems: TodoItem[];

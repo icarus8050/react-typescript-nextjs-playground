@@ -1,5 +1,5 @@
-import Hello from '../../src/components/Header';
-import Body from '../../src/components/Body';
+import Header from '../../src/components/App/Header';
+import Body from '../../src/components/App/Body';
 import { useState } from 'react';
 import { TodoItem } from '../../src/domain/todo/Todo';
 
@@ -8,7 +8,7 @@ export default function TodoApp() {
 
   return (
     <>
-      <Hello />
+      <Header />
       <Body todoItems={todoItems}
             setTodoItems={setTodoItems}
       />
